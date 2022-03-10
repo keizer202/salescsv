@@ -1,73 +1,85 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Sales CSV
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Sales CSV is a NestJS program that allows user to upload a csv file in an endpoint and preview it using another enpoint.
 
 ## Installation
+
+Use Terminal or Command Prompt to install all required pakages to run the program
 
 ```bash
 $ npm install
 ```
-
 ## Running the app
 
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+## Run the endpoint
+
+Use Postman to execute the endpoint. 
+
+### Upload CSV
+In Postman, set method to <b>Post</b> to upload the CSV file. In Body tab, set it to form-data then in Key column add <b>file</b> key then change it from Text to File. After changing it, you will see a <b>Select Files</b> button. Use that button to upload the CSV file. Kindly use below url to execute this endpoint.
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+http://localhost:3000/sales/record
 ```
 
-## Support
+Sample output after executing the endpoint
+```bash
+{
+  "message": "Record Successfully Uploaded"
+}
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### Note:
+You may also use the sample csv file located in csv folder to test the Upload CSV endpoint.
 
-## Stay in touch
+### Preview Uploaded Record
+In Postman, set method to <b>Get</b> to view the uploaded record. Kindly use below url to execute this endpoint.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+http://localhost:3000/sales/report
+```
+
+Sample output after executing the  endpoint
+```bash
+[
+  {
+    "userName": "user1",
+    "age": "29",
+    "height": "160",
+    "gender": "male",
+    "sales": "2000",
+    "lastPurchaseDate": "2022-03-10"
+  },
+  {
+    "userName": "User2",
+    "age": "23",
+    "height": "150",
+    "gender": "Female",
+    "sales": "5000",
+    "lastPurchaseDate": "2022-03-09"
+  }
+]
+```
+
+### Preview Uploaded Record with Date Range
+Same process with <b>Preview Uploaded Record</b>, you just need to add query data in json format. In Body tab, set to <b>raw</b> then change the data format to json. Use the format of below json sample statement.
+
+```bash
+{
+  "date_from": "2022-03-10",
+  "date_to": "2022-03-10"
+}
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
 
 ## License
-
-Nest is [MIT licensed](LICENSE).
+[MIT](https://choosealicense.com/licenses/mit/)
