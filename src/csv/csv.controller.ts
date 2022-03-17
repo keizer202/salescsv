@@ -15,11 +15,9 @@ import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
 import '../middleware/file.filter';
 import { csvFileFilter } from '../middleware/file.filter';
-import { CsvData } from './csv.model';
 
 @Controller('sales')
 export class CsvController {
-  private csvdata: CsvData[] = [];
   constructor(private readonly csvService: CsvService) {}
 
   @Post('record')
